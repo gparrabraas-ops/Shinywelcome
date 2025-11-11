@@ -1,0 +1,632 @@
+import React, { useState } from 'react';
+import { Phone, Mail, MapPin, Star, Home, Building, Feather, Sparkles, Calendar, Move, Users, Shield, Clock, Heart, MessageSquare, Quote } from 'lucide-react';
+
+const App = () => {
+  const [activePage, setActivePage] = useState('home');
+
+  const faqs = [
+    {
+      question: "How do I book a cleaning service?",
+      answer: "You can book online through our website, call us directly at +64 21 085 14129, or email us at info@shinywelcome.co.nz. We'll get back to you within 24 hours to confirm your booking."
+    },
+    {
+      question: "What areas do you service?",
+      answer: "We proudly serve all of Auckland, New Zealand. Whether you're in the CBD, North Shore, South Auckland, or anywhere in between, we've got you covered."
+    },
+    {
+      question: "Do you provide your own cleaning supplies?",
+      answer: "Yes, we bring all professional-grade cleaning equipment and eco-friendly cleaning products. However, if you have specific products you'd prefer us to use, just let us know!"
+    },
+    {
+      question: "Are your cleaners insured and bonded?",
+      answer: "Absolutely! All our staff are fully insured, bonded, and have undergone thorough background checks for your peace of mind."
+    },
+    {
+      question: "What if I'm not satisfied with the cleaning?",
+      answer: "We guarantee 100% satisfaction. If you're not completely happy with our service, please contact us within 24 hours and we'll return to address any concerns at no extra cost."
+    }
+  ];
+
+  const services = [
+    {
+      icon: Home,
+      title: "Residential Cleaning",
+      description: "Regular and one-time cleaning services for homes of all sizes, tailored to your specific needs and schedule."
+    },
+    {
+      icon: Building,
+      title: "Commercial Cleaning",
+      description: "Professional office and business cleaning services to maintain a clean, healthy, and productive work environment."
+    },
+    {
+      icon: Feather,
+      title: "Soft Cleaning",
+      description: "Gentle cleaning for delicate surfaces, fabrics, and areas that require special care and attention."
+    },
+    {
+      icon: Sparkles,
+      title: "Deep Cleaning",
+      description: "Comprehensive deep cleaning that tackles every corner, including areas often missed in regular cleaning."
+    },
+    {
+      icon: Sparkles,
+      title: "Spring Cleaning",
+      description: "Seasonal deep clean to refresh your entire home or office after the winter months."
+    },
+    {
+      icon: Calendar,
+      title: "Regular Cleaning",
+      description: "Scheduled weekly, bi-weekly, or monthly cleaning services to keep your space consistently pristine."
+    },
+    {
+      icon: Move,
+      title: "Move In/Move Out Cleaning",
+      description: "Complete cleaning services for when you're moving into a new home or preparing your current home for new tenants."
+    }
+  ];
+
+  // Replace this URL with your actual logo URL once deployed
+  const logoUrl = "https://placehold.co/150x50/2DDDDD/1e36A8A?text=Shiny+Welcome+Logo";
+
+  const HomePage = () => (
+    <div className="min-h-screen bg-[#2DDDDD]">
+      {/* Header */}
+      <header className="bg-white shadow-lg">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <img 
+              src={logoUrl} 
+              alt="Shiny Welcome Logo" 
+              className="h-10 w-auto object-contain"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                // Fallback to text if logo fails to load
+                const parent = e.target.parentElement;
+                if (parent) {
+                  parent.innerHTML = '<h1 class="text-2xl font-bold text-[#2DDDDD]">Shiny Welcome</h1>';
+                }
+              }}
+            />
+            <h1 className="text-2xl font-bold text-[#2DDDDD] hidden">Shiny Welcome</h1>
+          </div>
+          <nav className="hidden md:flex space-x-6">
+            {['home', 'about', 'services', 'contact', 'quote'].map((page) => (
+              <button 
+                key={page}
+                onClick={() => setActivePage(page)} 
+                className="text-[#2DDDDD] hover:text-[#1a9a9a] font-semibold transition-colors capitalize"
+              >
+                {page === 'quote' ? 'Free Quote' : page}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl md:text-7xl font-bold text-[#1e36A8A] mb-6">
+            Shiny Welcome
+          </h1>
+          <p className="text-[#1e36A8A] text-xl md:text-2xl mb-12 max-w-3xl mx-auto">
+            Professional cleaning services that bring shine and freshness to every corner of your home or business
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            <button 
+              onClick={() => setActivePage('about')}
+              className="bg-white text-[#1e36A8A] px-6 py-4 rounded-lg font-bold hover:bg-[#1e36A8A] hover:text-white transition-all shadow-lg"
+            >
+              About Us
+            </button>
+            <button 
+              onClick={() => setActivePage('services')}
+              className="bg-white text-[#1e36A8A] px-6 py-4 rounded-lg font-bold hover:bg-[#1e36A8A] hover:text-white transition-all shadow-lg"
+            >
+              Services
+            </button>
+            <button 
+              onClick={() => setActivePage('contact')}
+              className="bg-white text-[#1e36A8A] px-6 py-4 rounded-lg font-bold hover:bg-[#1e36A8A] hover:text-white transition-all shadow-lg"
+            >
+              Contact
+            </button>
+            <button 
+              onClick={() => setActivePage('quote')}
+              className="bg-white text-[#1e36A8A] px-6 py-4 rounded-lg font-bold hover:bg-[#1e36A8A] hover:text-white transition-all shadow-lg"
+            >
+              Free Quote
+            </button>
+            <button 
+              onClick={() => setActivePage('home')}
+              className="bg-[#1e36A8A] text-white px-6 py-4 rounded-lg font-bold hover:bg-white hover:text-[#1e36A8A] transition-all shadow-lg"
+            >
+              Home
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Overview Section */}
+      <section className="py-16 px-4 bg-white/10">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-[#1e36A8A] text-center mb-12">What We Offer</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Home className="text-[#1e36A8A] w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-[#1e36A8A] mb-2">Professional Cleaning</h3>
+              <p className="text-[#1e36A8A]">Expert residential and commercial cleaning services</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="text-[#1e36A8A] w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-[#1e36A8A] mb-2">Trusted Team</h3>
+              <p className="text-[#1e36A8A]">Fully trained, insured, and background-checked professionals</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="text-[#1e36A8A] w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-[#1e36A8A] mb-2">100% Guarantee</h3>
+              <p className="text-[#1e36A8A]">Satisfaction guaranteed or we'll make it right</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="text-[#1e36A8A] w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-[#1e36A8A] mb-2">Eco-Friendly</h3>
+              <p className="text-[#1e36A8A]">Safe, non-toxic cleaning products for your family and pets</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#2DDDDD] py-8 px-4">
+        <div className="container mx-auto text-center">
+          <p className="text-[#1e36A8A] mb-2">info@shinywelcome.co.nz</p>
+          <p className="text-[#1e36A8A]">+64 21 085 14129 | Auckland, New Zealand</p>
+        </div>
+      </footer>
+    </div>
+  );
+
+  const AboutPage = () => (
+    <div className="min-h-screen bg-[#2DDDDD]">
+      {/* Header */}
+      <header className="bg-white shadow-lg">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <img 
+              src={logoUrl} 
+              alt="Shiny Welcome Logo" 
+              className="h-10 w-auto object-contain"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                const parent = e.target.parentElement;
+                if (parent) {
+                  parent.innerHTML = '<h1 class="text-2xl font-bold text-[#2DDDDD]">Shiny Welcome</h1>';
+                }
+              }}
+            />
+            <h1 className="text-2xl font-bold text-[#2DDDDD] hidden">Shiny Welcome</h1>
+          </div>
+          <nav className="hidden md:flex space-x-6">
+            {['home', 'about', 'services', 'contact', 'quote'].map((page) => (
+              <button 
+                key={page}
+                onClick={() => setActivePage(page)} 
+                className="text-[#2DDDDD] hover:text-[#1a9a9a] font-semibold transition-colors capitalize"
+              >
+                {page === 'quote' ? 'Free Quote' : page}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl font-bold text-[#1e36A8A] mb-6">About Shiny Welcome</h1>
+          <p className="text-[#1e36A8A] text-xl max-w-3xl mx-auto">
+            Our story, vision, and mission to bring exceptional cleaning services to Auckland
+          </p>
+        </div>
+      </section>
+
+      {/* Our Story */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-3xl font-bold text-[#1e36A8A] mb-8 text-center">Our Story</h2>
+          <div className="bg-white rounded-lg p-8 shadow-lg">
+            <p className="text-[#1e36A8A] text-lg leading-relaxed">
+              Shiny Welcome was founded in Auckland with a simple mission: to provide exceptional cleaning services that exceed our clients' expectations. What started as a small local business has grown into a trusted name in the cleaning industry, serving hundreds of satisfied residential and commercial clients across Auckland.
+            </p>
+            <p className="text-[#1e36A8A] text-lg leading-relaxed mt-4">
+              Our founder recognized the need for reliable, professional cleaning services that prioritize quality, trust, and customer satisfaction above all else. Today, we continue that legacy with a dedicated team of professionals who treat every home and business as if it were their own.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision & Mission */}
+      <section className="py-16 px-4 bg-white/10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="bg-white rounded-lg p-8 shadow-lg">
+              <h3 className="text-2xl font-bold text-[#1e36A8A] mb-4 flex items-center">
+                <Star className="w-6 h-6 text-yellow-400 mr-2" />
+                Our Vision
+              </h3>
+              <p className="text-[#1e36A8A] text-lg">
+                To be Auckland's most trusted and preferred cleaning service provider, known for our exceptional quality, reliability, and customer care.
+              </p>
+            </div>
+            <div className="bg-white rounded-lg p-8 shadow-lg">
+              <h3 className="text-2xl font-bold text-[#1e36A8A] mb-4 flex items-center">
+                <Heart className="w-6 h-6 text-yellow-400 mr-2" />
+                Our Mission
+              </h3>
+              <p className="text-[#1e36A8A] text-lg">
+                To deliver professional, eco-friendly cleaning services that transform spaces and exceed expectations, while building lasting relationships with our clients based on trust, integrity, and excellence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-3xl font-bold text-[#1e36A8A] mb-8 text-center">Frequently Asked Questions</h2>
+          <div className="space-y-6">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white rounded-lg p-6 shadow-lg">
+                <h3 className="text-xl font-bold text-[#1e36A8A] mb-3">{faq.question}</h3>
+                <p className="text-[#1e36A8A]">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#2DDDDD] py-8 px-4">
+        <div className="container mx-auto text-center">
+          <p className="text-[#1e36A8A] mb-2">info@shinywelcome.co.nz</p>
+          <p className="text-[#1e36A8A]">+64 21 085 14129 | Auckland, New Zealand</p>
+        </div>
+      </footer>
+    </div>
+  );
+
+  const ServicesPage = () => (
+    <div className="min-h-screen bg-[#2DDDDD]">
+      {/* Header */}
+      <header className="bg-white shadow-lg">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <img 
+              src={logoUrl} 
+              alt="Shiny Welcome Logo" 
+              className="h-10 w-auto object-contain"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                const parent = e.target.parentElement;
+                if (parent) {
+                  parent.innerHTML = '<h1 class="text-2xl font-bold text-[#2DDDDD]">Shiny Welcome</h1>';
+                }
+              }}
+            />
+            <h1 className="text-2xl font-bold text-[#2DDDDD] hidden">Shiny Welcome</h1>
+          </div>
+          <nav className="hidden md:flex space-x-6">
+            {['home', 'about', 'services', 'contact', 'quote'].map((page) => (
+              <button 
+                key={page}
+                onClick={() => setActivePage(page)} 
+                className="text-[#2DDDDD] hover:text-[#1a9a9a] font-semibold transition-colors capitalize"
+              >
+                {page === 'quote' ? 'Free Quote' : page}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl font-bold text-[#1e36A8A] mb-6">Our Services</h1>
+          <p className="text-[#1e36A8A] text-xl max-w-3xl mx-auto">
+            Comprehensive cleaning solutions designed to meet your every need
+          </p>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div key={index} className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow">
+                <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mb-6">
+                  <service.icon className="text-[#1e36A8A] w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-[#1e36A8A] mb-4">{service.title}</h3>
+                <p className="text-[#1e36A8A]">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 px-4 bg-white/10">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl font-bold text-[#1e36A8A] mb-6">Ready for a Spotless Space?</h2>
+          <p className="text-[#1e36A8A] text-xl mb-8 max-w-2xl mx-auto">
+            Contact us today to schedule your cleaning service and experience the Shiny Welcome difference!
+          </p>
+          <button 
+            onClick={() => setActivePage('quote')}
+            className="bg-white text-[#1e36A8A] px-8 py-4 rounded-lg font-bold text-lg hover:bg-[#1e36A8A] hover:text-white transition-colors shadow-lg"
+          >
+            Request a Free Quote
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#2DDDDD] py-8 px-4">
+        <div className="container mx-auto text-center">
+          <p className="text-[#1e36A8A] mb-2">info@shinywelcome.co.nz</p>
+          <p className="text-[#1e36A8A]">+64 21 085 14129 | Auckland, New Zealand</p>
+        </div>
+      </footer>
+    </div>
+  );
+
+  const ContactPage = () => (
+    <div className="min-h-screen bg-[#2DDDDD]">
+      {/* Header */}
+      <header className="bg-white shadow-lg">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <img 
+              src={logoUrl} 
+              alt="Shiny Welcome Logo" 
+              className="h-10 w-auto object-contain"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                const parent = e.target.parentElement;
+                if (parent) {
+                  parent.innerHTML = '<h1 class="text-2xl font-bold text-[#2DDDDD]">Shiny Welcome</h1>';
+                }
+              }}
+            />
+            <h1 className="text-2xl font-bold text-[#2DDDDD] hidden">Shiny Welcome</h1>
+          </div>
+          <nav className="hidden md:flex space-x-6">
+            {['home', 'about', 'services', 'contact', 'quote'].map((page) => (
+              <button 
+                key={page}
+                onClick={() => setActivePage(page)} 
+                className="text-[#2DDDDD] hover:text-[#1a9a9a] font-semibold transition-colors capitalize"
+              >
+                {page === 'quote' ? 'Free Quote' : page}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl font-bold text-[#1e36A8A] mb-6">Contact Us</h1>
+          <p className="text-[#1e36A8A] text-xl max-w-3xl mx-auto">
+            We're here to help you achieve the clean, fresh space you deserve
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Info */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <div className="bg-white rounded-lg p-12 shadow-lg text-center">
+            <h2 className="text-3xl font-bold text-[#1e36A8A] mb-8">Get in Touch</h2>
+            <div className="grid md:grid-cols-3 gap-8 mb-8">
+              <div className="flex flex-col items-center">
+                <Phone className="w-8 h-8 text-yellow-400 mb-3" />
+                <span className="text-[#1e36A8A] text-lg font-semibold">+64 21 085 14129</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <Mail className="w-8 h-8 text-yellow-400 mb-3" />
+                <span className="text-[#1e36A8A] text-lg font-semibold">info@shinywelcome.co.nz</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <MapPin className="w-8 h-8 text-yellow-400 mb-3" />
+                <span className="text-[#1e36A8A] text-lg font-semibold">Auckland, New Zealand</span>
+              </div>
+            </div>
+            <div className="mt-8">
+              <h3 className="text-2xl font-bold text-[#1e36A8A] mb-4">Business Hours</h3>
+              <div className="text-[#1e36A8A] space-y-2">
+                <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                <p>Saturday: 9:00 AM - 4:00 PM</p>
+                <p>Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#2DDDDD] py-8 px-4">
+        <div className="container mx-auto text-center">
+          <p className="text-[#1e36A8A] mb-2">info@shinywelcome.co.nz</p>
+          <p className="text-[#1e36A8A]">+64 21 085 14129 | Auckland, New Zealand</p>
+        </div>
+      </footer>
+    </div>
+  );
+
+  const QuotePage = () => (
+    <div className="min-h-screen bg-[#2DDDDD]">
+      {/* Header */}
+      <header className="bg-white shadow-lg">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <img 
+              src={logoUrl} 
+              alt="Shiny Welcome Logo" 
+              className="h-10 w-auto object-contain"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                const parent = e.target.parentElement;
+                if (parent) {
+                  parent.innerHTML = '<h1 class="text-2xl font-bold text-[#2DDDDD]">Shiny Welcome</h1>';
+                }
+              }}
+            />
+            <h1 className="text-2xl font-bold text-[#2DDDDD] hidden">Shiny Welcome</h1>
+          </div>
+          <nav className="hidden md:flex space-x-6">
+            {['home', 'about', 'services', 'contact', 'quote'].map((page) => (
+              <button 
+                key={page}
+                onClick={() => setActivePage(page)} 
+                className="text-[#2DDDDD] hover:text-[#1a9a9a] font-semibold transition-colors capitalize"
+              >
+                {page === 'quote' ? 'Free Quote' : page}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl font-bold text-[#1e36A8A] mb-6">Request a Free Quote</h1>
+          <p className="text-[#1e36A8A] text-xl max-w-3xl mx-auto">
+            Fill out our simple form and we'll get back to you with a personalized quote within 24 hours
+          </p>
+        </div>
+      </section>
+
+      {/* Quote Form */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="bg-white rounded-lg p-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-[#1e36A8A] mb-6 flex items-center">
+                <Quote className="w-6 h-6 text-yellow-400 mr-2" />
+                Request Your Quote
+              </h2>
+              <form className="space-y-4">
+                <div>
+                  <input 
+                    type="text" 
+                    placeholder="Your Name" 
+                    className="w-full px-4 py-3 border border-[#1e36A8A] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e36A8A]"
+                  />
+                </div>
+                <div>
+                  <input 
+                    type="email" 
+                    placeholder="Your Email" 
+                    className="w-full px-4 py-3 border border-[#1e36A8A] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e36A8A]"
+                  />
+                </div>
+                <div>
+                  <input 
+                    type="tel" 
+                    placeholder="Phone Number" 
+                    className="w-full px-4 py-3 border border-[#1e36A8A] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e36A8A]"
+                  />
+                </div>
+                <div>
+                  <select className="w-full px-4 py-3 border border-[#1e36A8A] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e36A8A]">
+                    <option value="">Select Service Type</option>
+                    <option value="residential">Residential Cleaning</option>
+                    <option value="commercial">Commercial Cleaning</option>
+                    <option value="deep">Deep Cleaning</option>
+                    <option value="spring">Spring Cleaning</option>
+                    <option value="move">Move In/Move Out</option>
+                    <option value="regular">Regular Cleaning</option>
+                  </select>
+                </div>
+                <div>
+                  <textarea 
+                    placeholder="Additional Details" 
+                    rows="4" 
+                    className="w-full px-4 py-3 border border-[#1e36A8A] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e36A8A]"
+                  ></textarea>
+                </div>
+                <button 
+                  type="submit"
+                  className="w-full bg-yellow-400 text-[#1e36A8A] px-4 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors"
+                >
+                  Request Free Quote
+                </button>
+              </form>
+            </div>
+            <div className="bg-white rounded-lg p-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-[#1e36A8A] mb-6">Contact Information</h2>
+              <div className="space-y-6">
+                <div className="flex items-center">
+                  <Phone className="w-6 h-6 text-yellow-400 mr-4" />
+                  <span className="text-[#1e36A8A] text-lg">+64 21 085 14129</span>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="w-6 h-6 text-yellow-400 mr-4" />
+                  <span className="text-[#1e36A8A] text-lg">info@shinywelcome.co.nz</span>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-6 h-6 text-yellow-400 mr-4" />
+                  <span className="text-[#1e36A8A] text-lg">Auckland, New Zealand</span>
+                </div>
+              </div>
+              <div className="mt-8">
+                <h3 className="text-xl font-bold text-[#1e36A8A] mb-4">Why Choose Us?</h3>
+                <ul className="text-[#1e36A8A] space-y-2">
+                  <li>• Free, no-obligation quotes</li>
+                  <li>• Competitive pricing</li>
+                  <li>• Fully insured and bonded</li>
+                  <li>• Eco-friendly cleaning products</li>
+                  <li>• 100% satisfaction guarantee</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#2DDDDD] py-8 px-4">
+        <div className="container mx-auto text-center">
+          <p className="text-[#1e36A8A] mb-2">info@shinywelcome.co.nz</p>
+          <p className="text-[#1e36A8A]">+64 21 085 14129 | Auckland, New Zealand</p>
+        </div>
+      </footer>
+    </div>
+  );
+
+  return (
+    <div className="font-sans">
+      {activePage === 'home' && <HomePage />}
+      {activePage === 'about' && <AboutPage />}
+      {activePage === 'services' && <ServicesPage />}
+      {activePage === 'contact' && <ContactPage />}
+      {activePage === 'quote' && <QuotePage />}
+    </div>
+  );
+};
+
+export default App;
